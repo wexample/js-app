@@ -11,7 +11,7 @@ class AppWorkdir(JavascriptPackageWorkdir):
         raw_value = super().prepare_value(raw_value=raw_value)
 
         def _build_remote_github(target: AppWorkdir) -> str:
-            return f"git@github.com:wexample/javascript-{string_to_kebab_case(target.get_project_name())}.git"
+            return f"git@github.com:wexample/{string_to_kebab_case(target.get_project_name())}.git"
 
         def _build_remote_gitlab(target: AppWorkdir) -> str:
             return f"ssh://git@gitlab.wexample.com:4567/wexample-javascript/{string_to_kebab_case(target.get_project_name())}.git"
