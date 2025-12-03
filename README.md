@@ -1,6 +1,6 @@
 # js_app
 
-Version: 0.0.5
+Version: 0.0.7
 
 ## Table of Contents
 
