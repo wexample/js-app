@@ -11,10 +11,7 @@
     "declarationMap": false,
     "isolatedModules": true,
     "resolveJsonModule": true,
-    "baseUrl": ".",
-    "paths": {
-      "@wexample/js-helpers/*": ["../js-helpers/*"]
-    }
+    "baseUrl": "."
   },
   "include": ["src"],
   "exclude": ["dist", "node_modules"]
