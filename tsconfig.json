@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "ES2020",
     "module": "ESNext",
-    "moduleResolution": "node",
-    "declaration": true,
-    "strict": false,
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true
   },
-  "include": ["src/**/*"]
+  "include": ["src"],
+  "exclude": ["dist", "node_modules"]
 }
