@@ -4,5 +4,8 @@
   "name": "@wexample/js-app",
   "publishConfig": {
     "access": "public"
+  },
+  "peerDependencies": {
+    "@wexample/js-helpers": "*"
   }
 }

@@ -1,3 +1,4 @@
-export default class App {
-    wip: true;
+import AsyncConstructor from '@wexample/js-helpers/src/Common/AsyncConstructor';
+export default class App extends AsyncConstructor {
 }
+//# sourceMappingURL=App.d.ts.map
