@@ -36,3 +36,7 @@ coverage*.lcov
 node_modules/
 .npm
 .eslintcache
+
+# Generated TypeScript declaration files (created by ts-loader during dev)
+src/**/*.d.ts
+src/**/*.d.ts.map
