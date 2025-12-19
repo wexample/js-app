@@ -1,6 +1,10 @@
 import AsyncConstructor from '@wexample/js-helpers/Common/AsyncConstructor';
 
+import AppService from './AppService';
+import ServicesRegistryInterface from '../interfaces/ServicesRegistryInterface';
+
 export default class App extends AsyncConstructor {
+  public services: ServicesRegistryInterface = {};
   constructor(
     readyCallback?: any | Function,
     globalName: string = 'app'
@@ -38,6 +42,31 @@ export default class App extends AsyncConstructor {
 
   // Hook for children: executed after DOM is ready but before seal().
   protected async beforeReady(): Promise<void> {
-    // Default: nothing to do.
+    await this.loadAndInitServices(this.getServices());
+  }
+
+  getServices(): (typeof AppService | [typeof AppService, any[]])[] {
+    return [
+
+    ];
+  }
+
+  loadServices(services: (typeof AppService | [typeof AppService, any[]])[]): AppService[] {
+    let instances = [];
+    // TODO
+    return instances;
+  }
+
+  async loadAndInitServices(
+    services: (typeof AppService | [typeof AppService, any[]])[]
+  ): Promise<any> {
+    let loadedServices = this.loadServices(services);
+    // TODO
+  }
+
+  getService(name: string | object): AppService {
+    name = (typeof name === 'string' ? name : (name as any).serviceName) as string
+
+    return this.services[name];
   }
 }
