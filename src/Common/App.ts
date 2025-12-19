@@ -2,6 +2,7 @@ import AsyncConstructor from '@wexample/js-helpers/Common/AsyncConstructor';
 
 export default class App extends AsyncConstructor {
   constructor(
+    readyCallback?: any | Function,
     globalName: string = 'app'
   ) {
     super();
@@ -11,11 +12,14 @@ export default class App extends AsyncConstructor {
     let doc = window.document;
 
     let run = async () => {
-      console.log('OK!');
-
       // Every core properties has been set,
       // block any try to add extra property.
       this.seal();
+
+      // Execute ready callbacks.
+      await this.readyComplete();
+
+      readyCallback && (await readyCallback());
     };
 
     let readyState = doc.readyState;
