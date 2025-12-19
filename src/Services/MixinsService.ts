@@ -1,4 +1,4 @@
-import MixinsAppService from '../class/MixinsAppService';
+import MixinsAppService from '../Class/MixinsAppService';
 import AppService from "@wexample/js-app/Common/AppService";
 
 export default class MixinsService extends AppService {

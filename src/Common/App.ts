@@ -1,9 +1,9 @@
 import AsyncConstructor from '@wexample/js-helpers/Common/AsyncConstructor';
 
 import AppService from './AppService';
-import ServicesRegistryInterface from '../interfaces/ServicesRegistryInterface';
+import ServicesRegistryInterface from '../Interfaces/ServicesRegistryInterface';
 import { arrayUnique } from "@wexample/js-helpers/Helper/Array";
-import MixinsService from "@wexample/js-app/services/MixinsService";
+import MixinsService from "@wexample/js-app/Services/MixinsService";
 
 export default class App extends AsyncConstructor {
   public services: ServicesRegistryInterface = {};

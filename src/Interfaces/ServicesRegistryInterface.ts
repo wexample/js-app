@@ -1,4 +1,4 @@
-import MixinsService from '../services/MixinsService';
+import MixinsService from '../Services/MixinsService';
 
 export default interface ServicesRegistryInterface {
   mixins?: MixinsService;
