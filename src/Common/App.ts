@@ -1,4 +1,4 @@
-import AsyncConstructor from '@wexample/js-helpers/src/Common/AsyncConstructor';
+import AsyncConstructor from '@wexample/js-helpers/Common/AsyncConstructor';
 
 export default class App extends AsyncConstructor {
 
