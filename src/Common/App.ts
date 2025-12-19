@@ -12,6 +12,9 @@ export default class App extends AsyncConstructor {
     let doc = window.document;
 
     let run = async () => {
+      // Allow children to perform setup before sealing.
+      await this.beforeReady();
+
       // Every core properties has been set,
       // block any try to add extra property.
       this.seal();
@@ -31,5 +34,10 @@ export default class App extends AsyncConstructor {
     } else {
       doc.addEventListener('DOMContentLoaded', run);
     }
+  }
+
+  // Hook for children: executed after DOM is ready but before seal().
+  protected async beforeReady(): Promise<void> {
+    // Default: nothing to do.
   }
 }
