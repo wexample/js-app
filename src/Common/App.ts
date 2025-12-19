@@ -2,6 +2,8 @@ import AsyncConstructor from '@wexample/js-helpers/Common/AsyncConstructor';
 
 import AppService from './AppService';
 import ServicesRegistryInterface from '../interfaces/ServicesRegistryInterface';
+import { arrayUnique } from "@wexample/js-helpers/Helper/Array";
+import MixinsService from "@wexample/js-app/services/MixinsService";
 
 export default class App extends AsyncConstructor {
   public services: ServicesRegistryInterface = {};
@@ -47,13 +49,33 @@ export default class App extends AsyncConstructor {
 
   getServices(): (typeof AppService | [typeof AppService, any[]])[] {
     return [
-
+      MixinsService,
     ];
   }
 
   loadServices(services: (typeof AppService | [typeof AppService, any[]])[]): AppService[] {
+    services = this.getServicesAndDependencies(services);
     let instances = [];
-    // TODO
+
+    services.forEach((service: (typeof AppService | [typeof AppService, any[]])) => {
+      let serviceClass
+      let serviceArgs: any[] = [];
+
+      if (Array.isArray(service)) {
+        serviceClass = service[0];
+        serviceArgs = service[1];
+      } else {
+        serviceClass = service;
+      }
+
+      let name = serviceClass.serviceName;
+
+      if (!this.services[name]) {
+        this.services[name] = new serviceClass(this, ...serviceArgs);
+        instances.push(this.services[name]);
+      }
+    });
+
     return instances;
   }
 
@@ -61,7 +83,39 @@ export default class App extends AsyncConstructor {
     services: (typeof AppService | [typeof AppService, any[]])[]
   ): Promise<any> {
     let loadedServices = this.loadServices(services);
-    // TODO
+
+    // Init mixins.
+    return this.services.mixins.invokeUntilComplete(
+      'hookInit',
+      'app',
+      [],
+      undefined,
+      loadedServices
+    );
+  }
+
+  getServicesAndDependencies(
+    services: (typeof AppService | [typeof AppService, any[]])[]
+  ): (typeof AppService | [typeof AppService, any[]])[] {
+
+    services.forEach((serviceDef: typeof AppService | [typeof AppService, any[]]) => {
+      let serviceClass: typeof AppService;
+
+      if (Array.isArray(serviceDef)) {
+        serviceClass = serviceDef[0];
+      } else {
+        serviceClass = serviceDef;
+      }
+
+      if (serviceClass.dependencies) {
+        services = [
+          ...services,
+          ...this.getServicesAndDependencies(serviceClass.dependencies),
+        ];
+      }
+    });
+
+    return arrayUnique(services) as (typeof AppService | [typeof AppService, any[]])[];
   }
 
   getService(name: string | object): AppService {
