@@ -32,20 +32,26 @@ export default class MixinsService extends AppService {
       let service;
 
       while (service = services.shift()) {
+        let currentName = service.constructor.serviceName;
         let timeout = setTimeout(() => {
-          throw `Mixins invocation timeout on method "${method}", stopping at "${currentName}".`;
+          const message = [
+            `Mixins invocation timeout on method "${method}", stopping at "${currentName}".`,
+            `Registry: ${JSON.stringify(registry)}.`
+          ].join(" ");
+
+          throw new Error(message);
         }, timeoutLimit);
 
-        let currentName = service.constructor.serviceName;
         let hooks = service.registerHooks();
 
         if (loops++ > loopsLimit) {
-          console.error(errorTrace);
-          console.error(registry);
-          throw (
-            `Stopping more than ${loops} recursions during services invocation ` +
-            `on method "${method}", stopping at ${currentName}, see trace below.`
-          );
+          const message = [
+            `Stopping more than ${loops} recursions during services invocation on method "${method}", stopping at ${currentName}.`,
+            `Trace: ${errorTrace.join(" -> ") || "none"}.`,
+            `Registry: ${JSON.stringify(registry)}.`
+          ].join(" ");
+
+          throw new Error(message);
         } else if (loops > loopsLimit - 10) {
           errorTrace.push(service);
         }
