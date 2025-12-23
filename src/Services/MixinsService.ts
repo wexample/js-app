@@ -1,4 +1,3 @@
-import MixinsAppService from '../Class/MixinsAppService';
 import AppService from "@wexample/js-app/Common/AppService";
 
 export default class MixinsService extends AppService {
@@ -60,11 +59,11 @@ export default class MixinsService extends AppService {
         }
 
         if (registry[currentName] === undefined) {
-          registry[currentName] = MixinsAppService.LOAD_STATUS_COMPLETE;
+          registry[currentName] = AppService.LOAD_STATUS_COMPLETE;
         }
 
         // "wait" says to retry after processing other services.
-        if (registry[currentName] === MixinsAppService.LOAD_STATUS_WAIT) {
+        if (registry[currentName] === AppService.LOAD_STATUS_WAIT) {
           // Enqueue again.
           services.push(service);
         }
