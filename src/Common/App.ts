@@ -49,10 +49,10 @@ export default class App extends AsyncConstructor {
 
   loadServices(services: (typeof AppService | [typeof AppService, any[]])[]): AppService[] {
     services = this.getServicesAndDependencies(services);
-    let instances = [];
+    const instances = [];
 
-    services.forEach((service: (typeof AppService | [typeof AppService, any[]])) => {
-      let serviceClass
+    services.forEach((service: typeof AppService | [typeof AppService, any[]]) => {
+      let serviceClass;
       let serviceArgs: any[] = [];
 
       if (Array.isArray(service)) {
@@ -62,7 +62,7 @@ export default class App extends AsyncConstructor {
         serviceClass = service;
       }
 
-      let name = serviceClass.serviceName;
+      const name = serviceClass.serviceName;
 
       if (!this.services[name]) {
         this.services[name] = new serviceClass(this, ...serviceArgs);
@@ -90,7 +90,6 @@ export default class App extends AsyncConstructor {
   getServicesAndDependencies(
     services: (typeof AppService | [typeof AppService, any[]])[]
   ): (typeof AppService | [typeof AppService, any[]])[] {
-
     services.forEach((serviceDef: typeof AppService | [typeof AppService, any[]]) => {
       let serviceClass: typeof AppService;
 
