@@ -1,4 +1,5 @@
 import AppService from '@wexample/js-app/Common/AppService';
+import type { AppServiceConstructor } from '../Types/AppServiceTypes';
 
 export default class MixinsService extends AppService {
   public static serviceName = 'mixins';
@@ -35,9 +36,7 @@ export default class MixinsService extends AppService {
         break;
       }
 
-      const currentName =
-        (service.constructor as typeof AppService & { serviceName?: string }).serviceName ??
-        service.constructor.name;
+      const currentName = (service.constructor as AppServiceConstructor).serviceName;
       const timeout = setTimeout(() => {
         const message = [
           `Mixins invocation timeout on method "${method}", stopping at "${currentName}".`,
