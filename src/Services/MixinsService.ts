@@ -1,7 +1,6 @@
 import AppService from "@wexample/js-app/Common/AppService";
 
 export default class MixinsService extends AppService {
-  public static serviceName: string = 'mixins';
 
   /**
    * Execute a hook until all ext do not return false.

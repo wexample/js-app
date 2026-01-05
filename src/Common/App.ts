@@ -4,9 +4,12 @@ import { arrayUnique } from '@wexample/js-helpers/Helper/Array';
 import type ServicesRegistryInterface from '../Interfaces/ServicesRegistryInterface';
 import type AppService from './AppService';
 
+type ReadyCallback = (() => void) | (() => Promise<void>);
+
 export default class App extends AsyncConstructor {
   public services: ServicesRegistryInterface = {};
-  constructor(readyCallback?: any, globalName: string = 'app') {
+
+  constructor(readyCallback?: ReadyCallback, globalName: string = 'app') {
     super();
 
     window[globalName] = this;
