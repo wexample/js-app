@@ -9,12 +9,13 @@ class AppWorkdir(JavascriptPackageWorkdir):
         from wexample_helpers.helpers.string import string_to_kebab_case
 
         raw_value = super().prepare_value(raw_value=raw_value)
+        name_config = self.get_runtime_config().search("global.name")
 
         def _build_remote_github(target: AppWorkdir) -> str:
-            return f"git@github.com:wexample/{string_to_kebab_case(target.get_project_name())}.git"
+            return f"git@github.com:wexample/{string_to_kebab_case(name_config.get_str())}.git"
 
         def _build_remote_gitlab(target: AppWorkdir) -> str:
-            return f"ssh://git@gitlab.wexample.com:4567/wexample-javascript/{string_to_kebab_case(target.get_project_name())}.git"
+            return f"ssh://git@gitlab.wexample.com:4567/wexample-javascript/{string_to_kebab_case(name_config.get_str())}.git"
 
         raw_value["git"] = {
             "main_branch": "main",
