@@ -9,7 +9,4 @@ export type AppServiceConstructor = (new (
   dependencies?: ServiceDefinition[];
 };
 
-export type ServiceDefinition =
-  | AppServiceConstructor
-  | [AppServiceConstructor, unknown[]];
-
+export type ServiceDefinition = AppServiceConstructor | [AppServiceConstructor, unknown[]];
