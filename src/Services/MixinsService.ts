@@ -1,7 +1,7 @@
-import AppService from "@wexample/js-app/Common/AppService";
+import AppService from '@wexample/js-app/Common/AppService';
 
 export default class MixinsService extends AppService {
-  public static serviceName = "mixins";
+  public static serviceName = 'mixins';
 
   /**
    * Execute a hook until all ext do not return false.
@@ -25,31 +25,31 @@ export default class MixinsService extends AppService {
     services: AppService[] = Object.values(this.app.services) as AppService[]
   ): Promise<any> {
     return new Promise(async (resolve) => {
-      let errorTrace: AppService[] = [];
+      const errorTrace: AppService[] = [];
       let loops: number = 0;
-      let loopsLimit: number = 100;
-      let registry: { [key: string]: string } = {};
+      const loopsLimit: number = 100;
+      const registry: { [key: string]: string } = {};
       let service;
 
-      while (service = services.shift()) {
-        let currentName = service.constructor.serviceName;
-        let timeout = setTimeout(() => {
+      while ((service = services.shift())) {
+        const currentName = service.constructor.serviceName;
+        const timeout = setTimeout(() => {
           const message = [
             `Mixins invocation timeout on method "${method}", stopping at "${currentName}".`,
-            `Registry: ${JSON.stringify(registry)}.`
-          ].join(" ");
+            `Registry: ${JSON.stringify(registry)}.`,
+          ].join(' ');
 
           throw new Error(message);
         }, timeoutLimit);
 
-        let hooks = service.registerHooks();
+        const hooks = service.registerHooks();
 
         if (loops++ > loopsLimit) {
           const message = [
             `Stopping more than ${loops} recursions during services invocation on method "${method}", stopping at ${currentName}.`,
-            `Trace: ${errorTrace.join(" -> ") || "none"}.`,
-            `Registry: ${JSON.stringify(registry)}.`
-          ].join(" ");
+            `Trace: ${errorTrace.join(' -> ') || 'none'}.`,
+            `Registry: ${JSON.stringify(registry)}.`,
+          ].join(' ');
 
           throw new Error(message);
         } else if (loops > loopsLimit - 10) {
@@ -57,11 +57,8 @@ export default class MixinsService extends AppService {
         }
 
         if (hooks && hooks[group] && hooks[group][method]) {
-          let argsLocal = args.concat([registry]);
-          registry[currentName] = await hooks[group][method].apply(
-            service,
-            argsLocal
-          );
+          const argsLocal = args.concat([registry]);
+          registry[currentName] = await hooks[group][method].apply(service, argsLocal);
         }
 
         if (registry[currentName] === undefined) {

@@ -1,6 +1,6 @@
+import type { ServiceDefinition } from '../Types/AppServiceTypes';
 import type App from './App';
 import AppChild from './AppChild';
-import type { ServiceDefinition } from '../Types/AppServiceTypes';
 
 export default abstract class AppService extends AppChild {
   public static LOAD_STATUS_COMPLETE = 'complete';
