@@ -1,23 +1,19 @@
+import MixinsService from '@wexample/js-app/Services/MixinsService';
 import AsyncConstructor from '@wexample/js-helpers/Common/AsyncConstructor';
-
-import AppService from './AppService';
-import ServicesRegistryInterface from '../Interfaces/ServicesRegistryInterface';
-import { arrayUnique } from "@wexample/js-helpers/Helper/Array";
-import MixinsService from "@wexample/js-app/Services/MixinsService";
+import { arrayUnique } from '@wexample/js-helpers/Helper/Array';
+import type ServicesRegistryInterface from '../Interfaces/ServicesRegistryInterface';
+import type AppService from './AppService';
 
 export default class App extends AsyncConstructor {
   public services: ServicesRegistryInterface = {};
-  constructor(
-    readyCallback?: any | Function,
-    globalName: string = 'app'
-  ) {
+  constructor(readyCallback?: any, globalName: string = 'app') {
     super();
 
     window[globalName] = this;
 
-    let doc = window.document;
+    const doc = window.document;
 
-    let run = async () => {
+    const run = async () => {
       // Allow children to perform setup before sealing.
       await this.beforeReady();
 
@@ -31,7 +27,7 @@ export default class App extends AsyncConstructor {
       readyCallback && (await readyCallback());
     };
 
-    let readyState = doc.readyState;
+    const readyState = doc.readyState;
 
     // Document has been parsed.
     // Allows running after loaded event.
@@ -48,9 +44,7 @@ export default class App extends AsyncConstructor {
   }
 
   getServices(): (typeof AppService | [typeof AppService, any[]])[] {
-    return [
-      MixinsService,
-    ];
+    return [MixinsService];
   }
 
   loadServices(services: (typeof AppService | [typeof AppService, any[]])[]): AppService[] {
@@ -82,9 +76,8 @@ export default class App extends AsyncConstructor {
   async loadAndInitServices(
     services: (typeof AppService | [typeof AppService, any[]])[]
   ): Promise<any> {
-    let loadedServices = this.loadServices(services);
+    const loadedServices = this.loadServices(services);
 
-    // Init mixins.
     return this.services.mixins.invokeUntilComplete(
       'hookInit',
       'app',
@@ -108,10 +101,7 @@ export default class App extends AsyncConstructor {
       }
 
       if (serviceClass.dependencies) {
-        services = [
-          ...services,
-          ...this.getServicesAndDependencies(serviceClass.dependencies),
-        ];
+        services = [...services, ...this.getServicesAndDependencies(serviceClass.dependencies)];
       }
     });
 
@@ -119,7 +109,7 @@ export default class App extends AsyncConstructor {
   }
 
   getService(name: string | object): AppService {
-    name = (typeof name === 'string' ? name : (name as any).serviceName) as string
+    name = (typeof name === 'string' ? name : (name as any).serviceName) as string;
 
     return this.services[name];
   }
