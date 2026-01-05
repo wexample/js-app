@@ -1,8 +1,10 @@
-import MixinsService from '@wexample/js-app/Services/MixinsService';
-import AsyncConstructor from '@wexample/js-helpers/Common/AsyncConstructor';
-import { arrayUnique } from '@wexample/js-helpers/Helper/Array';
-import type ServicesRegistryInterface from '../Interfaces/ServicesRegistryInterface';
-import type AppService from './AppService';
+import MixinsService from "@wexample/js-app/Services/MixinsService";
+import AsyncConstructor from "@wexample/js-helpers/Common/AsyncConstructor";
+import { arrayUnique } from "@wexample/js-helpers/Helper/Array";
+import type ServicesRegistryInterface from "../Interfaces/ServicesRegistryInterface";
+
+import type AppService from "./AppService";
+import type { AppServiceConstructor, ServiceDefinition } from "../Types/AppServiceTypes";
 
 type ReadyCallback = (() => void) | (() => Promise<void>);
 
@@ -46,17 +48,17 @@ export default class App extends AsyncConstructor {
     await this.loadAndInitServices(this.getServices());
   }
 
-  getServices(): (typeof AppService | [typeof AppService, any[]])[] {
+  getServices(): ServiceDefinition[] {
     return [MixinsService];
   }
 
-  loadServices(services: (typeof AppService | [typeof AppService, any[]])[]): AppService[] {
+  loadServices(services: ServiceDefinition[]): AppService[] {
     services = this.getServicesAndDependencies(services);
     const instances = [];
 
-    services.forEach((service: typeof AppService | [typeof AppService, any[]]) => {
-      let serviceClass;
-      let serviceArgs: any[] = [];
+    services.forEach((service: ServiceDefinition) => {
+      let serviceClass: AppServiceConstructor;
+      let serviceArgs: unknown[] = [];
 
       if (Array.isArray(service)) {
         serviceClass = service[0];
@@ -76,25 +78,23 @@ export default class App extends AsyncConstructor {
     return instances;
   }
 
-  async loadAndInitServices(
-    services: (typeof AppService | [typeof AppService, any[]])[]
-  ): Promise<any> {
+  async loadAndInitServices(services: ServiceDefinition[]): Promise<unknown> {
     const loadedServices = this.loadServices(services);
 
     return this.services.mixins.invokeUntilComplete(
-      'hookInit',
-      'app',
+      "hookInit",
+      "app",
       [],
       undefined,
-      loadedServices
+      loadedServices,
     );
   }
 
   getServicesAndDependencies(
-    services: (typeof AppService | [typeof AppService, any[]])[]
-  ): (typeof AppService | [typeof AppService, any[]])[] {
-    services.forEach((serviceDef: typeof AppService | [typeof AppService, any[]]) => {
-      let serviceClass: typeof AppService;
+    services: ServiceDefinition[],
+  ): ServiceDefinition[] {
+    services.forEach((serviceDef: ServiceDefinition) => {
+      let serviceClass: AppServiceConstructor;
 
       if (Array.isArray(serviceDef)) {
         serviceClass = serviceDef[0];
@@ -103,15 +103,18 @@ export default class App extends AsyncConstructor {
       }
 
       if (serviceClass.dependencies) {
-        services = [...services, ...this.getServicesAndDependencies(serviceClass.dependencies)];
+        services = [
+          ...services,
+          ...this.getServicesAndDependencies(serviceClass.dependencies),
+        ];
       }
     });
 
-    return arrayUnique(services) as (typeof AppService | [typeof AppService, any[]])[];
+    return arrayUnique(services) as ServiceDefinition[];
   }
 
-  getService(name: string | object): AppService {
-    name = (typeof name === 'string' ? name : (name as any).serviceName) as string;
+  getService(name: string | { serviceName: string }): AppService {
+    name = typeof name === 'string' ? name : name.serviceName;
 
     return this.services[name];
   }
