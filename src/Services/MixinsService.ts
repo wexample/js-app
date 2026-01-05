@@ -35,7 +35,9 @@ export default class MixinsService extends AppService {
         break;
       }
 
-      const currentName = service.constructor.serviceName;
+      const currentName =
+        (service.constructor as typeof AppService & { serviceName?: string }).serviceName ??
+        service.constructor.name;
       const timeout = setTimeout(() => {
         const message = [
           `Mixins invocation timeout on method "${method}", stopping at "${currentName}".`,
