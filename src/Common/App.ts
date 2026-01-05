@@ -1,10 +1,9 @@
-import MixinsService from "@wexample/js-app/Services/MixinsService";
-import AsyncConstructor from "@wexample/js-helpers/Common/AsyncConstructor";
-import { arrayUnique } from "@wexample/js-helpers/Helper/Array";
-import type ServicesRegistryInterface from "../Interfaces/ServicesRegistryInterface";
-
-import type AppService from "./AppService";
-import type { AppServiceConstructor, ServiceDefinition } from "../Types/AppServiceTypes";
+import MixinsService from '@wexample/js-app/Services/MixinsService';
+import AsyncConstructor from '@wexample/js-helpers/Common/AsyncConstructor';
+import { arrayUnique } from '@wexample/js-helpers/Helper/Array';
+import type ServicesRegistryInterface from '../Interfaces/ServicesRegistryInterface';
+import type { AppServiceConstructor, ServiceDefinition } from '../Types/AppServiceTypes';
+import type AppService from './AppService';
 
 type ReadyCallback = (() => void) | (() => Promise<void>);
 
@@ -82,17 +81,15 @@ export default class App extends AsyncConstructor {
     const loadedServices = this.loadServices(services);
 
     return this.services.mixins.invokeUntilComplete(
-      "hookInit",
-      "app",
+      'hookInit',
+      'app',
       [],
       undefined,
-      loadedServices,
+      loadedServices
     );
   }
 
-  getServicesAndDependencies(
-    services: ServiceDefinition[],
-  ): ServiceDefinition[] {
+  getServicesAndDependencies(services: ServiceDefinition[]): ServiceDefinition[] {
     services.forEach((serviceDef: ServiceDefinition) => {
       let serviceClass: AppServiceConstructor;
 
@@ -103,10 +100,7 @@ export default class App extends AsyncConstructor {
       }
 
       if (serviceClass.dependencies) {
-        services = [
-          ...services,
-          ...this.getServicesAndDependencies(serviceClass.dependencies),
-        ];
+        services = [...services, ...this.getServicesAndDependencies(serviceClass.dependencies)];
       }
     });
 
