@@ -21,9 +21,4 @@ jobs:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
 
-      - run: node -v && npm -v
-
-      - run: npm ci
-      - run: npm run lint --if-present
-
       - run: npm publish --access public
