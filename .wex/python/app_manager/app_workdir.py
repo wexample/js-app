@@ -5,6 +5,12 @@ from wexample_wex_addon_dev_javascript.workdir.javascript_package_workdir import
 
 
 class AppWorkdir(JavascriptPackageWorkdir):
+    def get_public_remote_repository_url(self) -> str | None:
+        from wexample_helpers.helpers.string import string_to_kebab_case
+
+        name_config = self.get_runtime_config().search("global.name")
+        return f"https://github.com/wexample/{string_to_kebab_case(name_config.get_str())}"
+
     def prepare_value(self, raw_value: DictConfig | None = None) -> DictConfig:
         from wexample_helpers.helpers.string import string_to_kebab_case
 
