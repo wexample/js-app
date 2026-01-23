@@ -2,3 +2,7 @@
 # yarn lockfile v1
 
 
+"@wexample/js-helpers@*":
+  version "0.0.12"
+  resolved "https://registry.npmjs.org/@wexample/js-helpers/-/js-helpers-0.0.12.tgz"
+  integrity sha512-kPmmGiSDQHEYwkJwwOdflp52O9fZ8tMZm1PWnrhD0Qluh1z9JM+24rFlcfFjY1LZ+8off2hYUaR53M+Bohb9Pw==

@@ -1,9 +1,25 @@
 {
-  "version": "0.0.21",
+  "version": "0.0.22",
   "type": "module",
   "name": "@wexample/js-app",
+  "files": [
+    "src"
+  ],
   "publishConfig": {
     "access": "public"
+  },
+  "exports": {
+    "./*": {
+      "types": "./src/*",
+      "default": "./src/*"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "src/*"
+      ]
+    }
   },
   "peerDependencies": {
     "@wexample/js-helpers": "*"
