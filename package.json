@@ -1,23 +1,30 @@
 {
-  "version": "0.0.26",
+  "version": "0.0.27",
   "type": "module",
   "name": "@wexample/js-app",
   "files": [
-    "src"
+    "dist"
   ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  },
   "publishConfig": {
     "access": "public"
   },
   "exports": {
     "./*": {
-      "types": "./src/*",
-      "default": "./src/*"
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
     }
   },
   "typesVersions": {
     "*": {
       "*": [
-        "src/*"
+        "dist/*"
       ]
     }
   },
