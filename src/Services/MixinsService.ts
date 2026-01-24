@@ -1,5 +1,5 @@
 import AppService from '@wexample/js-app/Common/AppService';
-import type { AppServiceConstructor } from '../Types/AppServiceTypes';
+import type { AppServiceConstructor } from '../Types/AppServiceTypes.js';
 
 export default class MixinsService extends AppService {
   public static serviceName = 'mixins';
