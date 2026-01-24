@@ -1,9 +1,9 @@
 import MixinsService from '@wexample/js-app/Services/MixinsService';
 import AsyncConstructor from '@wexample/js-helpers/Common/AsyncConstructor';
 import { arrayUnique } from '@wexample/js-helpers/Helper/Array';
-import type ServicesRegistryInterface from '../Interfaces/ServicesRegistryInterface';
-import type { AppServiceConstructor, ServiceDefinition } from '../Types/AppServiceTypes';
-import type AppService from './AppService';
+import type ServicesRegistryInterface from '../Interfaces/ServicesRegistryInterface.js';
+import type { AppServiceConstructor, ServiceDefinition } from '../Types/AppServiceTypes.js';
+import type AppService from './AppService.js';
 
 type ReadyCallback = (() => void) | (() => Promise<void>);
 

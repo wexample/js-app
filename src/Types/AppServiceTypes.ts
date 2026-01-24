@@ -1,5 +1,5 @@
-import type App from '../Common/App';
-import type AppService from '../Common/AppService';
+import type App from '../Common/App.js';
+import type AppService from '../Common/AppService.js';
 
 export type AppServiceConstructor = (new (
   app: App,
