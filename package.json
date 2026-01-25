@@ -1,10 +1,7 @@
 {
-  "version": "0.0.29",
+  "version": "0.0.30",
   "type": "module",
   "name": "@wexample/js-app",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build"
@@ -15,6 +12,13 @@
   "publishConfig": {
     "access": "public"
   },
+  "peerDependencies": {
+    "@wexample/js-helpers": "*"
+  },
+  "repository": "https://github.com/wexample/js-app",
+  "files": [
+    "dist"
+  ],
   "exports": {
     "./*": {
       "types": "./dist/*.d.ts",
@@ -27,9 +31,5 @@
         "dist/*"
       ]
     }
-  },
-  "peerDependencies": {
-    "@wexample/js-helpers": "*"
-  },
-  "repository": "https://github.com/wexample/js-app"
+  }
 }
