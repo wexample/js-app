@@ -1,5 +1,5 @@
 {
-  "version": "0.0.29",
+  "version": "0.0.30",
   "type": "module",
   "name": "@wexample/js-app",
   "scripts": {
@@ -15,5 +15,21 @@
   "peerDependencies": {
     "@wexample/js-helpers": "*"
   },
-  "repository": "https://github.com/wexample/js-app"
+  "repository": "https://github.com/wexample/js-app",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/*"
+      ]
+    }
+  }
 }
