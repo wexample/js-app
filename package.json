@@ -1,5 +1,5 @@
 {
-  "version": "0.0.32",
+  "version": "0.0.33",
   "type": "module",
   "name": "@wexample/js-app",
   "scripts": {
@@ -23,8 +23,8 @@
   "sideEffects": false,
   "exports": {
     "./*": {
-      "types": "./dist/*",
-      "default": "./dist/*"
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
     }
   }
 }
