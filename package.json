@@ -1,9 +1,10 @@
 {
-  "version": "0.0.31",
+  "version": "0.0.32",
   "type": "module",
   "name": "@wexample/js-app",
   "scripts": {
-    "build": "tsc",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
@@ -19,17 +20,11 @@
   "files": [
     "dist"
   ],
+  "sideEffects": false,
   "exports": {
     "./*": {
-      "types": "./dist/*.d.ts",
-      "default": "./dist/*.js"
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "dist/*"
-      ]
+      "types": "./dist/*",
+      "default": "./dist/*"
     }
   }
 }
