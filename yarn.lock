@@ -2,12 +2,12 @@
 # yarn lockfile v1
 
 
-"@wexample/js-helpers@*":
-  version "0.0.12"
-  resolved "https://registry.npmjs.org/@wexample/js-helpers/-/js-helpers-0.0.12.tgz"
-  integrity sha512-kPmmGiSDQHEYwkJwwOdflp52O9fZ8tMZm1PWnrhD0Qluh1z9JM+24rFlcfFjY1LZ+8off2hYUaR53M+Bohb9Pw==
+"@wexample/js-helpers@0.0.36":
+  "integrity" "sha512-SmwudEGCE6l3Zvy404/JVBvGOUYGF/zht42rsFMQAd14v9ylK0DhFbchjUbdH6v6wTB2WTwzZFRXG9/bgqLpdQ=="
+  "resolved" "https://registry.npmjs.org/@wexample/js-helpers/-/js-helpers-0.0.36.tgz"
+  "version" "0.0.36"
 
-typescript@^5.9.3:
-  version "5.9.3"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz"
-  integrity sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==
+"typescript@^5.9.3":
+  "integrity" "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="
+  "resolved" "https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz"
+  "version" "5.9.3"
