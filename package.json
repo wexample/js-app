@@ -12,7 +12,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "peerDependencies": {
+  "dependencies": {
     "@wexample/js-helpers": "*"
   },
   "repository": "https://github.com/wexample/js-app",
