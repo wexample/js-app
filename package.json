@@ -1,5 +1,5 @@
 {
-  "version": "0.0.34",
+  "version": "0.0.39",
   "type": "module",
   "name": "@wexample/js-app",
   "scripts": {
@@ -24,6 +24,13 @@
     "./*": {
       "types": "./src/*.ts",
       "default": "./src/*.ts"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "src/*"
+      ]
     }
   }
 }
