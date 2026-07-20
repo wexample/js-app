@@ -1,6 +1,6 @@
 # @wexample/js-app
 
-Version: 0.0.48
+Version: 0.0.49
 
 ## Table of Contents
 
