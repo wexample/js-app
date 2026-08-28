@@ -1,19 +1,3 @@
-# @wexample/js-app
-
-Version: 0.0.50
-
-`@wexample/js-app` is a small browser-side application kernel in TypeScript: the `App` class in src/Common/App.ts attaches itself to `window[globalName]` (`app` by default), waits for the document to be parsed, then instantiates the services returned by `getServices()` — pulling in each class's static `dependencies` along the way — and seals itself before running the ready callback. Services extend `AppService` (src/Common/AppService.ts) and expose their startup work through `registerHooks()`; `MixinsService.invokeUntilComplete()` calls every `hookInit` in turn and re-queues any service that returns `AppService.LOAD_STATUS_WAIT`, so a service that depends on another's result can simply ask to be retried later. It is meant for front-end code in the Wexample suite that needs a shared service registry with ordered, asynchronous initialisation rather than a full framework.
-
-## Table of Contents
-
-- [Architecture](#architecture)
-- [Integration in the Suite](#integration-in-the-suite)
-- [Dependencies](#dependencies)
-- [Versioning & Compatibility Policy](#versioning--compatibility-policy)
-- [License](#license)
-- [About us](#about-us)
-- [Migration Notes](#migration-notes)
-
 ## Architecture
 
 The package ships four source directories and no build output: `src/Common` holds the runtime classes, `src/Services` the single bundled service, `src/Types` and `src/Interfaces` the type layer. Everything under `src` is published as-is (`"files": ["src"]`, and an `exports` map whose `types` and `default` both point at `./src/*.ts`), so consumers compile the TypeScript themselves and `npm run build` here is only `tsc --noEmit`.
@@ -68,47 +52,3 @@ Value imports inside the package go through the package name, not a relative pat
 Registering a new service means giving it a static `serviceName`, adding it to the list returned by `getServices()` (or to another service's static `dependencies`), and declaring it on `ServicesRegistryInterface` if it is to be reachable as `app.services.<name>` with types.
 
 One trap: `src/Common/App.d.ts` is a stale emitted declaration sitting next to the source. It declares `export default class App extends AsyncConstructor {}` with no members and points at a `sourceMappingURL` that is not shipped. The real definition is `App.ts`.
-
-## Integration in the Suite
-
-This package is part of the Wexample Suite — a collection of high-quality, modular tools designed to work seamlessly together across multiple languages and environments.
-
-### Related Packages
-
-The suite includes packages for configuration management, file handling, prompts, and more. Each package can be used independently or as part of the integrated suite.
-
-Visit the [Wexample Suite documentation](https://docs.wexample.com) for the complete package ecosystem.
-
-## Dependencies
-
-- @wexample/js-helpers: 0.0.37
-
-## Versioning & Compatibility Policy
-
-Wexample packages follow **Semantic Versioning** (SemVer):
-
-- **MAJOR**: Breaking changes
-- **MINOR**: New features, backward compatible
-- **PATCH**: Bug fixes, backward compatible
-
-We maintain backward compatibility within major versions and provide clear migration guides for breaking changes.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-Free to use in both personal and commercial projects.
-
-## About us
-
-[Wexample](https://wexample.com) stands as a cornerstone of the digital ecosystem — a collective of seasoned engineers, researchers, and creators driven by a relentless pursuit of technological excellence. More than a media platform, it has grown into a vibrant community where innovation meets craftsmanship, and where every line of code reflects a commitment to clarity, durability, and shared intelligence.
-
-This packages suite embodies this spirit. Trusted by professionals and enthusiasts alike, it delivers a consistent, high-quality foundation for modern development — open, elegant, and battle-tested. Its reputation is built on years of collaboration, refinement, and rigorous attention to detail, making it a natural choice for those who demand both robustness and beauty in their tools.
-
-Wexample cultivates a culture of mastery. Each package, each contribution carries the mark of a community that values precision, ethics, and innovation — a community proud to shape the future of digital craftsmanship.
-
-## Migration Notes
-
-When upgrading between major versions, refer to the migration guides in the documentation.
-
-Breaking changes are clearly documented with upgrade paths and examples.
