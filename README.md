@@ -1,6 +1,6 @@
 # @wexample/js-app
 
-Version: 0.0.50
+Version: 0.0.51
 
 `@wexample/js-app` is a small browser-side application kernel in TypeScript: the `App` class in src/Common/App.ts attaches itself to `window[globalName]` (`app` by default), waits for the document to be parsed, then instantiates the services returned by `getServices()` — pulling in each class's static `dependencies` along the way — and seals itself before running the ready callback. Services extend `AppService` (src/Common/AppService.ts) and expose their startup work through `registerHooks()`; `MixinsService.invokeUntilComplete()` calls every `hookInit` in turn and re-queues any service that returns `AppService.LOAD_STATUS_WAIT`, so a service that depends on another's result can simply ask to be retried later. It is meant for front-end code in the Wexample suite that needs a shared service registry with ordered, asynchronous initialisation rather than a full framework.
 
