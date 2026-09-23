@@ -7,7 +7,7 @@ git:
 global:
   name: js_app
   type: app
-  version: 0.0.52
+  version: 0.0.53
 wex:
   migration: 5
   version: 6.0.136
