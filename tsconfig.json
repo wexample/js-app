@@ -19,18 +19,6 @@
       ],
       "@wexample/js-app/*": [
         "./src/*"
-      ],
-      "@wexample/js-helpers": [
-        "../js-helpers/src"
-      ],
-      "@wexample/js-helpers/*": [
-        "../js-helpers/src/*"
-      ],
-      "@wexample/js-pseudocode": [
-        "../js-pseudocode/src"
-      ],
-      "@wexample/js-pseudocode/*": [
-        "../js-pseudocode/src/*"
       ]
     }
   },
