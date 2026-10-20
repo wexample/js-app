@@ -1,6 +1,6 @@
 # @wexample/js-app
 
-Version: 0.0.59
+Version: 0.0.60
 
 `@wexample/js-app` is a small browser-side application kernel in TypeScript: the `App` class in src/Common/App.ts attaches itself to `window[globalName]` (`app` by default), waits for the document to be parsed, then instantiates the services returned by `getServices()` — pulling in each class's static `dependencies` along the way — and seals itself before running the ready callback. Services extend `AppService` (src/Common/AppService.ts) and expose their startup work through `registerHooks()`; `MixinsService.invokeUntilComplete()` calls every `hookInit` in turn and re-queues any service that returns `AppService.LOAD_STATUS_WAIT`, so a service that depends on another's result can simply ask to be retried later. It is meant for front-end code in the Wexample suite that needs a shared service registry with ordered, asynchronous initialisation rather than a full framework.
 
@@ -77,8 +77,6 @@ This package is part of the Wexample Suite — a collection of high-quality, mod
 
 The suite includes packages for configuration management, file handling, prompts, and more. Each package can be used independently or as part of the integrated suite.
 
-Visit the [Wexample Suite documentation](https://docs.wexample.com) for the complete package ecosystem.
-
 ## Dependencies
 
 - @wexample/js-helpers: >=5.0.0
@@ -106,6 +104,8 @@ Free to use in both personal and commercial projects.
 This packages suite embodies this spirit. Trusted by professionals and enthusiasts alike, it delivers a consistent, high-quality foundation for modern development — open, elegant, and battle-tested. Its reputation is built on years of collaboration, refinement, and rigorous attention to detail, making it a natural choice for those who demand both robustness and beauty in their tools.
 
 Wexample cultivates a culture of mastery. Each package, each contribution carries the mark of a community that values precision, ethics, and innovation — a community proud to shape the future of digital craftsmanship.
+
+Built and maintained by [Romain Weeger](https://weeger.io).
 
 ## Migration Notes
 
