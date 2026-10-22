@@ -1,5 +1,5 @@
 {
-  "version": "0.0.60",
+  "version": "0.0.61",
   "type": "module",
   "name": "@wexample/js-app",
   "scripts": {
@@ -13,7 +13,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@wexample/js-helpers": ">=5.0.0"
+    "@wexample/js-helpers": ">=5.0.5"
   },
   "repository": "https://github.com/wexample/js-app",
   "files": [
